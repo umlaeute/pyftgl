@@ -108,7 +108,7 @@ void export_font(const char* name)
 ////////////////////////////////////////////////////////////////////////////////////
 // FTGL Module
 
-BOOST_PYTHON_MODULE(ftgl)
+BOOST_PYTHON_MODULE(FTGL)
 {
 	export_font<OutlineFontWrapper>("OutlineFont");
 	export_font<PolygonFontWrapper>("PolygonFont");
