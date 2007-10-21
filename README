@@ -1,0 +1,42 @@
+README for PyFTGL
+
+Release 0.1a (October 21, 2007)
+
+
+Introduction
+------------
+
+FTGL is a free, open source library to enable developers to use 
+arbitrary fonts in their OpenGL applications. Unlike other OpenGL 
+font libraries FTGL uses standard font file formats and the Freetype 
+font library to open and 'decode' the fonts. It then takes that 
+output and stores it in a format most efficient for OpenGL rendering.
+
+PyFTGL turn wrap the functionality of FTGL into a Python module so 
+that it can be used in conjunction with PyOpenGL.
+
+
+Build Instructions
+------------------
+
+0. Prerequisites
+
+   Make sure you have the necessary libraries before building PyFTGL.
+
+   * FTGL
+     http://homepages.paradise.net.nz/henryj/code/#FTGL
+
+   * Freetype
+     http://www.freetype.org/
+
+   * boost::python
+     http://www.boost.org/
+
+
+1. Build the module.
+
+     $ python setup.py build
+
+2. Install the module.
+
+     $ python setup.py install
