@@ -1,7 +1,9 @@
+#!/usr/bin/env python
+
 from distutils.core import setup, Extension
 
 __author__ = "Anders Dahnielson"
-__doc__ = "PyFTGL"
+__doc__ = "Pyhon FTGL bindings"
 __version__ = "0.1a"
 
 ##########################################################################
