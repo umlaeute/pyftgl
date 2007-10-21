@@ -92,16 +92,16 @@ template<typename T>
 void export_font(const char* name)
 {
 	class_<T>(name, init<const char*>())
-		.add_property("ascender", &T::Ascender)
-		.add_property("descender", &T::Descender)
-		.add_property("line_height", &T::LineHeight)
-		.def("FaceSize", &T::FaceSize)
-		.def("Attach", &T::Attach)
-		.def("Depth", &T::Depth)
-		.def("UseDisplayList", &T::UseDisplayList)
-		.def("BBox", &T::BBox)
-		.def("Advance", &T::Advance)
-		.def("Render", &T::Render)
+		.add_property("ascender", &T::Ascender, "The global ascender height for the face.")
+		.add_property("descender", &T::Descender, "The global descender height for the face.")
+		.add_property("line_height", &T::LineHeight, "The line spacing for the font.")
+		.def("FaceSize", &T::FaceSize, "Set the char size for the current face.")
+		.def("Attach", &T::Attach, "Attach auxilliary file to font e.g font metrics.")
+		.def("Depth", &T::Depth, "Set the extrusion distance for the font.")
+		.def("UseDisplayList", &T::UseDisplayList, "Enable or disable the use of Display Lists inside FTGL.")
+		.def("BBox", &T::BBox, "Get the bounding box for a string.")
+		.def("Advance", &T::Advance, " Get the advance width for a string.")
+		.def("Render", &T::Render, "Render a string of characters.")
 		;
 }
 
