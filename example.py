@@ -116,7 +116,7 @@ if __name__ == '__main__':
     glutInitWindowSize(width, height)
     glutInit(sys.argv)
     glutInitDisplayMode(GLUT_RGBA|GLUT_DOUBLE)
-    glutCreateWindow("PyFTGL demo")
+    glutCreateWindow("PyFTGL Demo")
     glClearColor(0.0, 0.0, 0.0, 0.0)
 
     try:
