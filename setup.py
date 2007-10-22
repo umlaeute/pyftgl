@@ -4,7 +4,7 @@ from distutils.core import setup, Extension
 
 __author__ = "Anders Dahnielson"
 __doc__ = "Pyhon FTGL bindings"
-__version__ = "0.2a"
+__version__ = "0.3a"
 
 ##########################################################################
 ## FTGL module

@@ -1,25 +1,26 @@
 README for PyFTGL
 
-PyFTGL Release 0.2a (October 21, 2007)
-======================================
 
 Introduction
-------------
+============
 
-FTGL is a free, open source library to enable developers to use 
-arbitrary fonts in their OpenGL applications. Unlike other OpenGL 
-font libraries FTGL uses standard font file formats and the Freetype 
-font library to open the fonts.
+FTGL is a free, open source library to enable developers to use
+arbitrary fonts in their OpenGL applications. Unlike other OpenGL font
+libraries FTGL uses standard font file formats and the Freetype font
+library to open the fonts.
 
-PyFTGL in turn wraps the functionality of FTGL into a Python module 
-so that it can be used in conjunction with PyOpenGL.
+PyFTGL in turn wraps the functionality of FTGL into a Python module so
+that it can be used in conjunction with PyOpenGL.
 
+
+How to build
+============
 
 Prerequisites
 -------------
 
-   Make sure you have the necessary libraries installed before 
-   attempting to build PyFTGL.
+Make sure you have the necessary libraries installed before attempting
+to build PyFTGL.
 
    * FTGL
      http://homepages.paradise.net.nz/henryj/code/#FTGL
@@ -34,10 +35,98 @@ Prerequisites
 Build
 -----
 
-   $ python setup.py build
+$ python setup.py build
 
 
 Install
 -------
 
-   $ python setup.py install
+$ python setup.py install
+
+
+How to use
+==========
+
+Overview
+--------
+
+To use PyFTGL, start by import it:
+
+>>> import FTGL
+
+PyFTGL supports six different rendering modes:
+
+   * Bitmap
+   * Anti-aliased pixmap
+   * Anti-aliased texture maps
+   * Outlines
+   * Polygon meshes
+   * Extruded polygon meshes
+
+The first two modes draw directly to the screen raster, the texture
+map mode draw textured quads, while the last three draw actual
+geometry.
+
+The indivdual modes are encapsulated in their respective class:
+
+   * BitmapFont
+   * PixmapFont
+   * TextureFont
+   * OutlineFont
+   * PolygonFont
+   * ExtrdFont
+
+However, the protocol for all modes are the same:
+
+>>> font = FTGL.PolygonFont("example.ttf")
+>>> font.FaceSize(24)
+True
+>>> font.line_height
+37.51171875
+>>> font.Render("foo")
+
+Obviously, you need to set up the OpenGL environment to make it
+useful. Please see the example.py script for a demonstration of
+PyFTGL.
+
+
+Documentation
+-------------
+
+class XxxxFont()
+
+  Methods defined here:
+
+  Advance(string)
+      Get the advance width for a string.
+
+  Attach(font_file_path)
+      Attach auxilliary file to font e.g font metrics.
+
+  BBox(string)
+      Get the bounding box for a string. Returns tuple.
+
+  Depth(depth)
+      Set the extrusion distance for the font.
+
+  FaceSize(size[, res])
+      Set the char size for the current face.
+
+  Render(string)
+      Render a string of characters.
+
+  UseDisplayList(useLift)
+      Enable or disable the use of Display Lists inside FTGL.
+
+  __init__(font_file_path)
+
+  Properties defined here:
+
+  ascender
+      The global ascender height for the face.
+
+  descender
+      The global descender height for the face.
+
+  line_height
+      The line spacing for the font.

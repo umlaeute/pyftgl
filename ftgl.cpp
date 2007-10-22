@@ -22,6 +22,7 @@
 // FTGL
 #include <FTGL/FTGLOutlineFont.h>
 #include <FTGL/FTGLPolygonFont.h>
+#include <FTGL/FTGLExtrdFont.h>
 #include <FTGL/FTGLBitmapFont.h>
 #include <FTGL/FTGLTextureFont.h>
 #include <FTGL/FTGLPixmapFont.h>
@@ -42,13 +43,19 @@ class FontWrapper
 public:
 	FontWrapper(const char* fontFilePath) :
 		m_font(new base(fontFilePath))
-	{ }
+	{ 
+		if (m_font->Error() != 0)
+			throw std::invalid_argument("Invalid argument");
+	}
 
 	bool Attach( const char* fontFilePath)
-	{ m_font->Attach(fontFilePath); }
+	{ return m_font->Attach(fontFilePath); }
 
-	void FaceSize(const int size, const int res)
-	{ m_font->FaceSize(size, res); }
+	bool FaceSize(const unsigned int size, const unsigned int res)
+	{ return m_font->FaceSize(size, res); }
+
+	bool FaceSize1(const unsigned int size)
+	{ return m_font->FaceSize(size); }
 
 	void Depth(float depth)
 	{ m_font->Depth(depth);	}
@@ -84,6 +91,7 @@ private:
 
 typedef FontWrapper<FTGLOutlineFont> OutlineFontWrapper;
 typedef FontWrapper<FTGLPolygonFont> PolygonFontWrapper;
+typedef FontWrapper<FTGLExtrdFont> ExtrdFontWrapper;
 typedef FontWrapper<FTGLBitmapFont> BitmapFontWrapper;
 typedef FontWrapper<FTGLTextureFont> TextureFontWrapper;
 typedef FontWrapper<FTGLPixmapFont> PixmapFontWrapper;
@@ -96,6 +104,7 @@ void export_font(const char* name)
 		.add_property("descender", &T::Descender, "The global descender height for the face.")
 		.add_property("line_height", &T::LineHeight, "The line spacing for the font.")
 		.def("FaceSize", &T::FaceSize, "Set the char size for the current face.")
+		.def("FaceSize", &T::FaceSize1)
 		.def("Attach", &T::Attach, "Attach auxilliary file to font e.g font metrics.")
 		.def("Depth", &T::Depth, "Set the extrusion distance for the font.")
 		.def("UseDisplayList", &T::UseDisplayList, "Enable or disable the use of Display Lists inside FTGL.")
@@ -112,6 +121,7 @@ BOOST_PYTHON_MODULE(FTGL)
 {
 	export_font<OutlineFontWrapper>("OutlineFont");
 	export_font<PolygonFontWrapper>("PolygonFont");
+	export_font<ExtrdFontWrapper>("ExtrdFont");
 	export_font<BitmapFontWrapper>("BitmapFont");
 	export_font<TextureFontWrapper>("TextureFont");
 	export_font<PixmapFontWrapper>("PixmapFont");
