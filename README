@@ -90,10 +90,15 @@ useful. Please see the example.py script for a demonstration of
 PyFTGL.
 
 
-Documentation
--------------
+Classes
+-------
 
-class XxxxFont()
+class BitmapFont()
+class PixmapFont()
+class TextureFont()
+class OutlineFont()
+class PolygonFont()
+class ExtrdFont()
 
   Methods defined here:
 
@@ -102,12 +107,14 @@ class XxxxFont()
 
   Attach(font_file_path)
       Attach auxilliary file to font e.g font metrics.
+      Note: not all font formats implement this function.
 
   BBox(string)
       Get the bounding box for a string. Returns tuple.
 
   Depth(depth)
-      Set the extrusion distance for the font.
+      Set the extrusion distance for the font. Only implemented 
+      by ExtrdFont.
 
   FaceSize(size[, res])
       Set the char size for the current face.
@@ -115,7 +122,7 @@ class XxxxFont()
   Render(string)
       Render a string of characters.
 
-  UseDisplayList(useLift)
+  UseDisplayList(useList)
       Enable or disable the use of Display Lists inside FTGL.
 
   __init__(font_file_path)
