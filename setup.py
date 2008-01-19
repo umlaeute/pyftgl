@@ -2,7 +2,7 @@
 
 from distutils.core import setup, Extension
 
-__version__ = "0.4b"
+__version__ = "0.5b"
 __author__ = "Anders Dahnielson"
 __doc__ = """Python FTGL binding
 
