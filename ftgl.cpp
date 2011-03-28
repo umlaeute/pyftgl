@@ -1,7 +1,7 @@
 // PyFTGL
-// Copyright (c) 2007, Anders Dahnielson
+// Copyright (c) 2007-2011, Anders Dahnielson, Luke Williams
 //
-// Contact: anders@dahnielson.com
+// Contact: pyftgl@shmookey.net
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public
@@ -20,12 +20,7 @@
 
 
 // FTGL
-#include <FTGL/FTGLOutlineFont.h>
-#include <FTGL/FTGLPolygonFont.h>
-#include <FTGL/FTGLExtrdFont.h>
-#include <FTGL/FTGLBitmapFont.h>
-#include <FTGL/FTGLTextureFont.h>
-#include <FTGL/FTGLPixmapFont.h>
+#include <FTGL/ftgl.h>
 
 // Boost
 #include <boost/python.hpp>
@@ -85,8 +80,20 @@ public:
 	float Advance(const char* string)
 	{ return m_font->Advance(string); }
 
+	float AdvanceKerned(const char* string, const double xSpacing)
+	{ 
+		FTPoint *kern = new FTPoint (xSpacing, 0.0, 0.0);
+		return m_font->Advance(string, -1, *kern); 
+	}
+	
 	void Render(const char* string)
 	{ m_font->Render(string); }
+
+	void RenderKerned(const char* string, const double xSpacing)
+	{ 
+		FTPoint *kern = new FTPoint (xSpacing, 0.0, 0.0);
+		m_font->Render(string, -1, *(new FTPoint ()), *kern); 
+	}
 
 private:
 	base* m_font;
@@ -114,7 +121,9 @@ void export_font(const char* name)
 		.def("UseDisplayList", &T::UseDisplayList, "Enable or disable the use of Display Lists inside FTGL.")
 		.def("BBox", &T::BBox, "Get the bounding box for a string.")
 		.def("Advance", &T::Advance, " Get the advance width for a string.")
+		.def("Advance", &T::AdvanceKerned)
 		.def("Render", &T::Render, "Render a string of characters.")
+		.def("Render", &T::RenderKerned)
 		;
 }
 
